@@ -28,4 +28,9 @@ header.site-init{
     color:white;
     margin-right: 30px;
     text-decoration: none;
+     
+}
+
+.input-error{
+    border:1px solid red;
 }
