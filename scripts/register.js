@@ -1,10 +1,11 @@
 //create a User constructor
 class User {
-    constructor(fname, lname, email, password) {
+    constructor(fname, lname, email, password,gender) {
         this.firstName = fname;
         this.lastName = lname;
         this.email = email;
         this.password = password;
+        this.gender=gender;
     }
 }
 
@@ -25,26 +26,38 @@ function isValid(user){
     }
     return valid;
 }
+function validatePass(){
+    console.log("validating pass");
+    //get the value from the input
+    let txtPass=$("#txtPassword");
+    let password=txtPass.val();
+    if(password.length<6){//is the password less than 6 characters?
+        txtPass.css("background","#ff9898");//jquery function to change the css
+    }else{
+        txtPass.css("background","#64ce66");// jquery function to change the css
+    }   
+}
+
+
 function register(){
     let inputfName = $("#txtFirstName").val();//getting the value
     let inputlName = $("#txtLastName").val();
     let inputEmail = $("#txtEmail").val();
     let inputPassword = $("#txtPassword").val();
+    let inputGender = $("#txtGender").val();
     
-    let newUser = new User(inputfName,inputlName,inputEmail,inputPassword);
+    let newUser = new User(inputfName,inputlName,inputEmail,inputPassword,inputGender);
     if(isValid(newUser)){
        saveUser(newUser);//this fn is on the storeManager
-    }
-    
+       $('input').val("");// clear the inputs
+    } 
 }
 
 function init(){
-    console.log("Init function");
+    console.log("Register");
+    //hook events
+    $("#txtPassword").keyup(validatePass);// it is executed everytime that the key is up
 
-    //create two users and display them on the console
-    let user1 = new User("Ben","Vance","ben@gmail.com","Test1234");
-    let user2 = new User("Jason","Cerilli","jason@gmail.com","Test123456");
-    console.log(user1,user2);
 }
 
 window.onload=init;
